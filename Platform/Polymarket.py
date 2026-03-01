@@ -148,7 +148,6 @@ class PolymarketClient:
         self,
         active: Optional[bool] = None,
         closed: Optional[bool] = None,
-        within_days: Optional[int] = None,
         limit: int = 100,
         offset: int = 0,
     ) -> list[Event]:
@@ -159,16 +158,7 @@ class PolymarketClient:
             params["closed"] = str(closed).lower()
 
         data = self._get("/events", params)
-        events = [Event.from_dict(item) for item in data]
-
-        if within_days is not None:
-            cutoff = datetime.now(timezone.utc) + timedelta(days=within_days)
-            events = [
-                e for e in events
-                if e.end_date and _parse_dt(e.end_date) is not None
-                and _parse_dt(e.end_date) <= cutoff
-            ]
-        return events
+        return [Event.from_dict(item) for item in data]
 
     def fetch_all_events(
         self,
@@ -176,16 +166,22 @@ class PolymarketClient:
         closed: Optional[bool] = None,
         within_days: Optional[int] = None,
     ) -> list[Event]:
+        cutoff = datetime.now(timezone.utc) + timedelta(days=within_days) if within_days else None
         events: list[Event] = []
         offset = 0
         limit = 100
         while True:
-            batch = self.fetch_events(
-                active=active, closed=closed, within_days=within_days,
-                limit=limit, offset=offset,
-            )
+            # la pagination se base sur le nombre brut retourné par l'API
+            batch = self.fetch_events(active=active, closed=closed, limit=limit, offset=offset)
+            raw_count = len(batch)
+            if cutoff is not None:
+                batch = [
+                    e for e in batch
+                    if e.end_date and _parse_dt(e.end_date) is not None
+                    and _parse_dt(e.end_date) <= cutoff
+                ]
             events.extend(batch)
-            if len(batch) < limit:
+            if raw_count < limit:
                 break
             offset += limit
         return events
@@ -194,7 +190,6 @@ class PolymarketClient:
         self,
         active: Optional[bool] = None,
         closed: Optional[bool] = None,
-        within_days: Optional[int] = None,
         limit: int = 100,
         offset: int = 0,
     ) -> list[Market]:
@@ -205,16 +200,7 @@ class PolymarketClient:
             params["closed"] = str(closed).lower()
 
         data = self._get("/markets", params)
-        markets = [Market.from_dict(item) for item in data]
-
-        if within_days is not None:
-            cutoff = datetime.now(timezone.utc) + timedelta(days=within_days)
-            markets = [
-                m for m in markets
-                if m.end_date and _parse_dt(m.end_date) is not None
-                and _parse_dt(m.end_date) <= cutoff
-            ]
-        return markets
+        return [Market.from_dict(item) for item in data]
 
     def fetch_all_markets(
         self,
@@ -222,16 +208,21 @@ class PolymarketClient:
         closed: Optional[bool] = None,
         within_days: Optional[int] = None,
     ) -> list[Market]:
+        cutoff = datetime.now(timezone.utc) + timedelta(days=within_days) if within_days else None
         markets: list[Market] = []
         offset = 0
         limit = 100
         while True:
-            batch = self.fetch_markets(
-                active=active, closed=closed, within_days=within_days,
-                limit=limit, offset=offset,
-            )
+            batch = self.fetch_markets(active=active, closed=closed, limit=limit, offset=offset)
+            raw_count = len(batch)
+            if cutoff is not None:
+                batch = [
+                    m for m in batch
+                    if m.end_date and _parse_dt(m.end_date) is not None
+                    and _parse_dt(m.end_date) <= cutoff
+                ]
             markets.extend(batch)
-            if len(batch) < limit:
+            if raw_count < limit:
                 break
             offset += limit
         return markets

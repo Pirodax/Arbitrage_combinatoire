@@ -1,0 +1,302 @@
+[
+  {
+    "id": "12",
+    "condition_id": "0xe3b423dfad8c22ff75c9899c4e8176f628cf4ad4caa00481764d320e7415f7a9",
+    "question": "Will Joe Biden get Coronavirus before the election?",
+    "slug": "will-joe-biden-get-coronavirus-before-the-election",
+    "category": "US-current-affairs",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.0,
+      0.0
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.0,
+    "volume": 32257.45,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2020-11-04T00:00:00Z",
+    "clob_token_ids": [
+      "53135072462907880191400140706440867753044989936304433583131786753949599718775",
+      "60869871469376321574904667328762911501870754872924453995477779862968218702336"
+    ]
+  },
+  {
+    "id": "17",
+    "condition_id": "0x44f10d1cd5aaed4b7ae0b5edb76790f54f45dc0bcaa86831c83d865c774fbb90",
+    "question": "Will Airbnb begin publicly trading before Jan 1, 2021?",
+    "slug": "will-airbnb-begin-publicly-trading-before-jan-1-2021",
+    "category": "Tech",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.0,
+      0.0
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.0,
+    "volume": 89665.25,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2021-01-02T00:00:00Z",
+    "clob_token_ids": [
+      "23957885615115430922384185661294483989521212430808224513177413172438775950057",
+      "44065917169138815451032058926556960033374557137879250075091545322436931840853"
+    ]
+  },
+  {
+    "id": "18",
+    "condition_id": "0x3e0524de013d9dc359f5eb370773f25de2f03d3200294cfd0fa7dac2f399d101",
+    "question": "Will a new Supreme Court Justice be confirmed before Nov 3rd, 2020?",
+    "slug": "will-a-new-supreme-court-justice-be-confirmed-before-nov-3rd-2020",
+    "category": "US-current-affairs",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.0,
+      0.0
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.0,
+    "volume": 43279.46,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2020-11-04T00:00:00Z",
+    "clob_token_ids": [
+      "7192973530925903015287004813226256961086727269646918334118953338356315960259",
+      "16847315704461293231139078524698349110433698045131366205472540524863290566139"
+    ]
+  },
+  {
+    "id": "19",
+    "condition_id": "0x9b946f54f3428aafc308c33aa04a943fe13a011bdac9a9b66e1ba16c416ca256",
+    "question": "Will Kim Kardashian and Kanye West divorce before Jan 1, 2021?",
+    "slug": "will-kim-kardashian-and-kanye-west-divorce-before-jan-1-2021",
+    "category": "Pop-Culture ",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      1.0110820525225415e-06,
+      0.9999989889179475
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.18,
+    "volume": 22067.48,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": "2023-08-24T16:35:24.938Z",
+    "end_date": "2021-01-02T00:00:00Z",
+    "clob_token_ids": [
+      "4485468797843270805361907688585033105060134197906764657766452761383944608702",
+      "99620935296034450526138833612193162137893979576079468831519296537203486531810"
+    ]
+  },
+  {
+    "id": "20",
+    "condition_id": "0x5d1a1ab716fd06943441fe27cde0089651ce769bec55e191b6953468a0e9f0d0",
+    "question": "Will Coinbase begin publicly trading before Jan 1, 2021?",
+    "slug": "will-coinbase-begin-publicly-trading-before-jan-1-2021",
+    "category": "Crypto",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      1.0245195095681696e-06,
+      0.9999989754804904
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.37,
+    "volume": 116803.38,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2021-01-02T00:00:00Z",
+    "clob_token_ids": [
+      "36272374199536229966445059644094050673269921351760158331280706670625385054221",
+      "29551507732179460087505547206009697311109043686065631717734195665429037695993"
+    ]
+  },
+  {
+    "id": "36",
+    "condition_id": "0xd903891c2b9046cae14615afc4c5245370143503f7b2dfc13919acee07a1696d",
+    "question": "What will the price of Bitcoin be on November 4th, 2020?",
+    "slug": "what-will-the-price-of-bitcoin-be-on-november-4th-2020",
+    "category": "Crypto",
+    "market_type": "scalar",
+    "outcomes": [
+      "Long",
+      "Short"
+    ],
+    "outcome_prices": [
+      0.0,
+      0.0
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.0,
+    "volume": 59755.8,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2020-11-04T00:00:00Z",
+    "clob_token_ids": [
+      "53678111440828523722141246186412284959552524573416536208576098319557003483879",
+      "27264257149048736764964503982112624364843013894764060447611166847296827564421"
+    ]
+  },
+  {
+    "id": "40",
+    "condition_id": "0xf2e631ea675c5b09caea0bf65cf7887e25907af2657c8c907f02d9afbff20d05",
+    "question": "Will Trump win the 2020 U.S. presidential election?",
+    "slug": "will-trump-win-the-2020-us-presidential-election",
+    "category": "US-current-affairs",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      4.3643034980462864e-08,
+      0.999999956356965
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 68.28,
+    "volume": 10802601.99,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2020-11-20T00:00:00Z",
+    "clob_token_ids": [
+      "44804726753601178293652604511461891232965799888489574021036312274240304608626",
+      "94401806442428580808350321395221392306408700984448347080151499651427713760581"
+    ]
+  },
+  {
+    "id": "42",
+    "condition_id": "0xfa8cc293e14872fca0c7e8b240360683e392e1d7a4b5ac7616b1f7e50c454ad2",
+    "question": "Will there be an Emergency Use Authorization (EUA) granted for a COVID-19 vaccine prior to Nov 3 2020?",
+    "slug": "will-there-be-an-emergency-use-authorization-granted-for-a-covid-19-vaccine-prior-to-nov-3",
+    "category": "Coronavirus",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.0,
+      0.0
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 0.0,
+    "volume": 21881.06,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2020-11-04T00:00:00Z",
+    "clob_token_ids": [
+      "9030489128964541226472769512853420102537079705747655800192176119504724017392",
+      "76498560192118683650733506412944777208149122792035467707472962601509300857635"
+    ]
+  },
+  {
+    "id": "43",
+    "condition_id": "0x7333b6e016f7f60d86f15f11ed0b41b69deec0b6d73b86933639b1f39a545d87",
+    "question": "What will the total value locked (TVL) in DeFi be at the end of 2020, according to DefiPulse?",
+    "slug": "what-will-the-total-value-locked-tvl-in-defi-be-at-the-end-of-2020-according-to-defipulse",
+    "category": "Crypto",
+    "market_type": "scalar",
+    "outcomes": [
+      "Long",
+      "Short"
+    ],
+    "outcome_prices": [
+      0.5843311669077693,
+      0.4156688330922307
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 4.6,
+    "volume": 46944.58,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2021-01-02T00:00:00Z",
+    "clob_token_ids": [
+      "39300000801750313506415881962475878529141489415482379908932315503554876854698",
+      "1993578487229597591293755303341708890459187725728713215820133740213314514940"
+    ]
+  },
+  {
+    "id": "44",
+    "condition_id": "0xb2eecb8d14e871c5b82a3b037fc5f8b703c218e41aa578c8e870244585b9db78",
+    "question": "What will the USD price of Filecoin ($FIL) be on November 17th, 2020?",
+    "slug": "what-will-the-usd-price-of-filecoin-fil-be-on-november-17th-2020",
+    "category": "Crypto",
+    "market_type": "scalar",
+    "outcomes": [
+      "Long",
+      "Short"
+    ],
+    "outcome_prices": [
+      0.4988929462743077,
+      0.5011070537256923
+    ],
+    "best_bid": null,
+    "best_ask": 1.0,
+    "last_trade_price": null,
+    "liquidity": 190.13,
+    "volume": 69947.1,
+    "volume_24hr": 0.0,
+    "active": true,
+    "closed": true,
+    "start_date": null,
+    "end_date": "2020-11-17T00:00:00Z",
+    "clob_token_ids": [
+      "107699364100754617875486132785724523107969133188296890147988278666088935403692",
+      "22109666543078076459357678702338675150149605914715142144925647528888085903187"
+    ]
+  }
+]

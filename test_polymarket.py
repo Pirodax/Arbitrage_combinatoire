@@ -12,8 +12,8 @@ def to_dict(obj):
 def main():
     client = PolymarketClient()
 
-    print("Fetching active events (closing within 30 days)...")
-    events = client.fetch_all_events(active=True, closed=False, within_days=30)
+    print("Fetching active events (closing within 3 days)...")
+    events = client.fetch_all_events(active=True, closed=False, within_days=3)
     print(f"  -> {len(events)} events fetched")
 
     with open("polymarket_events.json", "w", encoding="utf-8") as f:

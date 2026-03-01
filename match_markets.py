@@ -25,7 +25,7 @@ W_TEXT          = 0.90
 W_DATE          = 0.10
 SCORE_THRESHOLD = 65.0
 DATE_DECAY_DAYS = 365
-WITHIN_DAYS     = 30
+WITHIN_DAYS     = 3
 
 
 # ── category mapping ──────────────────────────────────────────────────────────
@@ -146,6 +146,116 @@ def date_score(d1: Optional[str], d2: Optional[str]) -> float:
 
 def final_score(ts: float, ds: float) -> float:
     return round(W_TEXT * ts + W_DATE * ds, 2)
+
+
+# ── date extraction from text ─────────────────────────────────────────────────
+_MONTH_MAP: dict[str, int] = {
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+    "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+    "january": 1, "february": 2, "march": 3, "april": 4,
+    "june": 6, "july": 7, "august": 8, "september": 9,
+    "october": 10, "november": 11, "december": 12,
+}
+# Match "March 2", "Mar 1", "March 2, 2026", "Mar 1, 2026"
+_TEXT_DATE_RE = re.compile(r'\b([A-Za-z]{3,9})\s+(\d{1,2})(?:,?\s*(\d{4}))?\b')
+
+def _extract_date_from_text(text: str) -> Optional[str]:
+    """Return YYYY-MM-DD extracted from market title text, or None."""
+    for m in _TEXT_DATE_RE.finditer(text):
+        month = _MONTH_MAP.get(m.group(1).lower())
+        if not month:
+            continue
+        day = int(m.group(2))
+        if not (1 <= day <= 31):
+            continue
+        year = int(m.group(3)) if m.group(3) else datetime.now(timezone.utc).year
+        try:
+            datetime(year, month, day)  # validate
+            return f"{year:04d}-{month:02d}-{day:02d}"
+        except ValueError:
+            continue
+    return None
+
+def _date_ref(text: str, end_date: Optional[str]) -> Optional[str]:
+    """Best-effort reference date for a market: text extraction first, end_date as fallback."""
+    d = _extract_date_from_text(text)
+    if d:
+        return d
+    dt = parse_date(end_date)
+    if dt:
+        return dt.date().isoformat()
+    return None
+
+
+# ── hard validation gates ─────────────────────────────────────────────────────
+_METRIC_HIGH = re.compile(r'\b(high|highest|maximum|max)\b', re.IGNORECASE)
+_METRIC_LOW  = re.compile(r'\b(low|lowest|minimum|min|cold)\b', re.IGNORECASE)
+_TEMP_RANGE  = re.compile(r'(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)')
+_TEMP_SINGLE = re.compile(r'(\d+(?:\.\d+)?)\s*°')
+
+def _metric_direction(text: str) -> Optional[str]:
+    """Return 'high', 'low', or None if ambiguous/absent."""
+    has_high = bool(_METRIC_HIGH.search(text))
+    has_low  = bool(_METRIC_LOW.search(text))
+    if has_high and not has_low:
+        return "high"
+    if has_low and not has_high:
+        return "low"
+    return None
+
+def _temp_range_of(text: str) -> Optional[tuple[float, float]]:
+    """Return (lo, hi) temperature range from text, or None."""
+    m = _TEMP_RANGE.search(text)
+    if m:
+        a, b = float(m.group(1)), float(m.group(2))
+        return (min(a, b), max(a, b))
+    m = _TEMP_SINGLE.search(text)
+    if m:
+        v = float(m.group(1))
+        return (v, v)
+    return None
+
+def _ranges_contain(r1: tuple[float, float], r2: tuple[float, float]) -> bool:
+    """True if r1 ⊆ r2 or r2 ⊆ r1 (one bucket contains the other)."""
+    r1_in_r2 = r2[0] <= r1[0] and r1[1] <= r2[1]
+    r2_in_r1 = r1[0] <= r2[0] and r2[1] <= r1[1]
+    return r1_in_r2 or r2_in_r1
+
+def _hard_validate(pm: dict, ks: dict, category: str) -> tuple[bool, str]:
+    """
+    Returns (accept, reason).
+    Rejects matches that fail strict semantic constraints.
+    Currently enforced for: weather (4 gates: date, metric, bucket, city).
+    """
+    if category == "weather":
+        pm_q = pm.get("question", "")
+        ks_t = ks.get("title", "")
+
+        # Gate 1 — date de référence
+        pm_date = _date_ref(pm_q, pm.get("_end_date"))
+        ks_date = _date_ref(ks_t, ks.get("_end_date"))
+        if pm_date and ks_date and pm_date != ks_date:
+            return False, f"REJECT_DATE_MISMATCH pm={pm_date} ks={ks_date}"
+
+        # Gate 2 — direction métrique (high vs low)
+        pm_dir = _metric_direction(pm_q)
+        ks_dir = _metric_direction(ks_t)
+        if pm_dir and ks_dir and pm_dir != ks_dir:
+            return False, f"REJECT_METRIC_MISMATCH pm={pm_dir} ks={ks_dir}"
+
+        # Gate 3 — bucket température (doit se chevaucher)
+        pm_range = _temp_range_of(pm_q)
+        ks_range = _temp_range_of(ks_t)
+        if pm_range and ks_range and not _ranges_contain(pm_range, ks_range):
+            return False, f"REJECT_BUCKET_MISMATCH pm={pm_range} ks={ks_range}"
+
+        # Gate 4 — ville (si les deux en ont une, elle doit correspondre)
+        pm_cities = entity_tokens(pm_q)
+        ks_cities = entity_tokens(ks_t)
+        if pm_cities and ks_cities and not (pm_cities & ks_cities):
+            return False, f"REJECT_CITY_MISMATCH pm={pm_cities} ks={ks_cities}"
+
+    return True, "ok"
 
 
 # ── flatten events → markets ──────────────────────────────────────────────────
@@ -273,6 +383,11 @@ def match(pm_markets: list[dict], ks_markets: list[dict]) -> list[Match]:
             fs = final_score(ts, ds)
 
             if fs < SCORE_THRESHOLD:
+                continue
+
+            # ── filtre 3 : validation sémantique dure ──────────────────────
+            valid, reason = _hard_validate(pm, ks, pm_cat)
+            if not valid:
                 continue
 
             candidate = Match(

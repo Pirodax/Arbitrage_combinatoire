@@ -12,8 +12,8 @@ def to_dict(obj):
 def main():
     client = KalshiClient()
 
-    print("Fetching open events (closing within 30 days)...")
-    events = client.fetch_all_events(status="open", within_days=30)
+    print("Fetching open events (closing within 3 days)...")
+    events = client.fetch_all_events(status="open", within_days=3)
     print(f"  -> {len(events)} events fetched")
 
     with open("kalshi_events.json", "w", encoding="utf-8") as f:

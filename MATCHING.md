@@ -13,17 +13,17 @@ polymarket_events.json          kalshi_events.json
         │                               │
         └──────────────┬────────────────┘
                        ▼
-              Normalisation des titres
+           flatten_pm_markets / flatten_ks_markets
+           (filtre ≤ WITHIN_DAYS, exclut scalaires)
                        │
                        ▼
-              Score textuel (rapidfuzz)
+              Filtre 1 : catégorie identique
                        │
-              Score de date (decay)
+              Filtre 2 : entités nommées compatibles
                        │
-                       ▼
-              Score final = 70% texte + 30% date
+              Filtre 3 : score final ≥ SCORE_THRESHOLD
                        │
-              Seuil : 72 / 100
+              Filtre 4 : validation sémantique dure
                        │
                        ▼
                  matches.json
@@ -43,124 +43,155 @@ tokens = [t for t in text.split() if t not in STOP_WORDS]
 
 **Stop words supprimés** : `will, the, a, an, in, on, at, by, to, of, be, is, any, or, and, for, before, after, this, that, with, from`
 
-**Exemples :**
-
-| Titre brut | Après normalisation |
-|---|---|
-| `"Will Trump win the election?"` | `trump win election` |
-| `"Trump wins the 2024 election"` | `trump wins 2024 election` |
-
 ---
 
 ## 2. Score textuel — `token_sort_ratio`
 
 Fonction : `rapidfuzz.fuzz.token_sort_ratio(a, b)` → `[0, 100]`
 
-### Comment ça marche
-
 1. **Tokenisation** : découpe en mots
 2. **Tri alphabétique** des tokens (neutralise l'ordre des mots)
 3. **Ratio de Levenshtein** entre les deux chaînes triées
-
-### Formule interne
-
-```
-edit_distance = nombre minimum d'insertions/suppressions/substitutions
-                pour transformer A en B
-
-ratio = (1 - edit_distance / max(len(A), len(B))) × 100
-```
-
-**Exemple concret :**
-
-```
-A = "trump win election"      → trié : "election trump win"
-B = "trump wins 2024 election" → trié : "2024 election trump wins"
-
-edit_distance ≈ 10
-max_len       = 24
-ratio = (1 - 10/24) × 100 ≈ 58.3
-```
-
-### Pourquoi `token_sort` et pas `ratio` simple ?
-
-`ratio` simple est sensible à l'ordre des mots :
-- `"Bitcoin price 2025"` vs `"2025 Bitcoin price"` → ratio ≈ 53
-- Avec `token_sort_ratio` → 100 (identiques une fois triés)
 
 ---
 
 ## 3. Score de date — décroissance exponentielle
 
-Formule :
-
 ```
 score_date = 100 × 0.05^(|Δjours| / DATE_DECAY_DAYS)
 ```
 
-Avec `DATE_DECAY_DAYS = 30`.
+Avec `DATE_DECAY_DAYS = 365`.
 
 | Écart entre les dates | Score date |
 |---|---|
 | 0 jours (même date) | **100.0** |
-| 10 jours | 49.4 |
-| 30 jours | 5.0 |
-| 60 jours | 0.25 |
+| 30 jours | 22.6 |
+| 180 jours | 2.3 |
 | Date manquante | **50.0** (neutre) |
 
-La base `0.05` garantit qu'à exactement `DATE_DECAY_DAYS` jours d'écart, le score tombe à 5/100 — considéré comme négligeable.
+> **Pourquoi date à 10 % ?**
+> Kalshi utilise des dates de clôture arbitraires (parfois 2029 pour un marché 2026).
+> Le texte reste le signal principal ; la date ne sert que de léger tiebreaker.
 
 ---
 
 ## 4. Score final
 
 ```
-score_final = 0.70 × score_texte + 0.30 × score_date
+score_final = 0.90 × score_texte + 0.10 × score_date
 ```
 
-Les poids reflètent que **le titre est le signal principal** et la date sert de tiebreaker / validateur.
+### Seuil : 65 / 100
 
-| Composante | Poids | Justification |
-|---|---|---|
-| Texte | 70 % | Contenu sémantique principal |
-| Date | 30 % | Discrimine les séries répétitives (ex: élections mensuelles) |
-
-### Seuil : 72 / 100
-
-En dessous de 72, la paire est rejetée. Ce seuil a été choisi pour :
-- Accepter des formulations légèrement différentes (ex: "wins" vs "win")
-- Rejeter les faux positifs sur des thèmes génériques ("Will X happen?")
+En dessous de 65, la paire est rejetée.
 
 ---
 
-## 5. Détection d'arbitrage
+## 5. Filtres de pré-sélection
 
-Une fois un match confirmé, le `price_gap` est calculé :
+### Catégorie normalisée
+
+Chaque marché est assigné à une catégorie normalisée :
+
+| Catégorie | PM tags | KS categories |
+|---|---|---|
+| `sports` | Sports, Soccer, NBA, NFL… | Sports |
+| `politics` | Politics, Elections… | Elections, Politics |
+| `crypto` | Crypto, Bitcoin, Ethereum… | Crypto |
+| `weather` | Weather, Daily Temperature | Climate and Weather |
+| `economics` | Economics, Finance | Economics, Financials |
+| `entertainment` | Culture, Entertainment | Entertainment |
+| `companies` | Companies | Companies |
+| `world` | World | World |
+| `other` | (reste) | (reste) |
+
+Un match est rejeté si les catégories sont incompatibles (sauf si l'une des deux est `other`).
+
+### Entités nommées
+
+Chaque titre est parsé pour en extraire les **noms propres** (mots capitalisés ≥ 3 lettres, hors stop list) et les **nombres**.
+
+Un match est rejeté si les deux côtés ont des entités mais aucune en commun.
+
+### Exclusions spécifiques
+
+- **Polymarket** : marchés "Up or Down", "up/down", heures intraday (ex: `5:30pm`)
+- **Kalshi** : events scalaires (plusieurs marchés avec le même titre = brackets de prix)
+
+---
+
+## 6. Validation sémantique dure (gates)
+
+Après le seuil de score, une validation stricte est appliquée par catégorie.
+Un seul gate qui échoue → le match est rejeté, quelle que soit la similarité textuelle.
+
+### Catégorie `weather` — 4 gates
+
+| Gate | Logique | Exemple rejeté |
+|---|---|---|
+| **Date de référence** | Extrait la date du texte ("March 2", "Mar 1, 2026"), fallback sur `end_date`. Rejette si les dates diffèrent. | PM=2026-03-02, KS=2026-03-01 |
+| **Direction métrique** | Détecte `high/highest/max` vs `low/min/minimum`. Rejette si opposés. | "highest temp" vs "minimum temp" |
+| **Bucket température** | Extrait la plage numérique. Exige la **containment** (r1 ⊆ r2 ou r2 ⊆ r1), pas juste un chevauchement. | 82-83°F vs 81-82° (adjacents) |
+| **Ville** | Si les deux titres ont des entités nommées, exige une intersection. | "Seoul … 6°C" vs titre sans ville |
+
+#### Extraction de date depuis le texte
+
+```python
+# Patterns reconnus :
+"on March 2"      → 2026-03-02
+"Mar 1, 2026?"    → 2026-03-01
+"March 2, 2026"   → 2026-03-02
+# Fallback : end_date converti en date locale
+```
+
+#### Containment vs overlap pour les buckets
 
 ```
-price_gap = pm_yes_price - ks_yes_ask
+(82, 83) ⊆ (81, 82) ? → NON  → rejeté  ✓
+(84, 85) ⊆ (84, 85) ? → OUI  → accepté ✓
+(28, 28) ⊆ (28, 29) ? → OUI  → accepté ✓  (PM: "28°C", KS: "28-29°")
 ```
 
-- `price_gap > 0` → Polymarket cote le YES plus haut que Kalshi : **acheter sur Kalshi, vendre sur Polymarket**
-- `price_gap < 0` → inverse
+---
+
+## 7. Calcul d'arbitrage
+
+```
+YES_PM + NO_KS  → profit = 1 - (pm_yes_ask + ks_no_ask)
+NO_PM  + YES_KS → profit = 1 - (pm_no_ask  + ks_yes_ask)
+```
+
+- `pm_no_ask ≈ 1 - pm_yes_bid`
+- `ks_no_ask` fourni directement par l'API Kalshi
+
+Un `profit > 0` signifie un gain garanti avant frais.
 
 ### Exemple de sortie (`matches.json`)
 
 ```json
 {
-  "score": 84.3,
-  "text_score": 91.0,
-  "date_score": 64.2,
-  "price_gap": 0.05,
+  "match_score": 95.8,
+  "text_score": 95.3,
+  "date_score": 100.0,
+  "category": "politics",
+  "arbitrage": {
+    "best_profit": 0.04,
+    "direction": "NO_PM + YES_KS",
+    "yes_pm_no_ks": -0.01,
+    "no_pm_yes_ks": 0.04
+  },
   "polymarket": {
-    "title": "Will Trump impose tariffs on Canada?",
-    "end": "2025-04-01T00:00:00Z",
-    "yes_price": 0.72
+    "question": "Will Donald Trump endorse Ken Paxton for the Texas Republican Senate?",
+    "end": "2026-03-02T...",
+    "yes_ask": 0.14,
+    "no_ask": 0.87
   },
   "kalshi": {
-    "title": "Trump tariffs on Canada before April?",
-    "end": "2025-04-01T04:59:00Z",
-    "yes_ask": 0.67
+    "title": "Will Donald Trump endorse Ken Paxton in the 2026 Texas Senate Rep...",
+    "end": "2026-03-03T...",
+    "yes_ask": 0.09,
+    "no_ask": 0.93
   }
 }
 ```
@@ -173,20 +204,6 @@ price_gap = pm_yes_price - ks_yes_ask
 |---|---|---|
 | `W_TEXT` | 0.90 | Poids du score textuel |
 | `W_DATE` | 0.10 | Poids du score de date |
-| `SCORE_THRESHOLD` | 72.0 | Seuil minimum pour garder un match |
+| `SCORE_THRESHOLD` | 65.0 | Seuil minimum pour garder un match |
 | `DATE_DECAY_DAYS` | 365 | Jours pour atteindre score_date ≈ 5 |
-
-> **Pourquoi date à 10 % ?**
-> Kalshi utilise des dates de clôture arbitraires (parfois 2029 pour un marché 2026).
-> Le texte reste le signal principal ; la date ne sert que de léger tiebreaker.
-
----
-
-## Résultat sur 100 PM × 200 KS events
-
-```
-[90.0] Who will Trump nominate as Fed Chair?  ← gap = +0.93 ⚡
-[85.3] Presidential Election Winner 2028
-[80.8] US recognize Somaliland by...?
-[76.7] Which party wins 2028 US Presidential Election?
-```
+| `WITHIN_DAYS` | 3 | Fenêtre max de clôture (jours) |

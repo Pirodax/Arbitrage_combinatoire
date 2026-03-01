@@ -81,7 +81,7 @@ class Event:
     slug: str
     title: str
     description: str
-    category: str
+    tags: list[str]
     active: bool
     closed: bool
     liquidity: float
@@ -94,13 +94,14 @@ class Event:
     @classmethod
     def from_dict(cls, data: dict) -> "Event":
         markets = [Market.from_dict(m) for m in data.get("markets", [])]
+        tags = [t["label"] for t in data.get("tags", []) if "label" in t]
         return cls(
             id=data.get("id", ""),
             ticker=data.get("ticker", ""),
             slug=data.get("slug", ""),
             title=data.get("title", ""),
             description=data.get("description", ""),
-            category=data.get("category", ""),
+            tags=tags,
             active=data.get("active", False),
             closed=data.get("closed", False),
             liquidity=float(data.get("liquidity") or 0),

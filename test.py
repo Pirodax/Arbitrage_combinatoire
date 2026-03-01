@@ -13,7 +13,7 @@ def main():
     client = PolymarketClient()
 
     print("Fetching active events...")
-    events = client.fetch_events(active=True, limit=10)
+    events = client.fetch_events(active=True, closed=False, limit=10)
     print(f"  -> {len(events)} events fetched")
 
     with open("events.json", "w", encoding="utf-8") as f:
@@ -21,7 +21,7 @@ def main():
     print("  -> saved to events.json")
 
     print("Fetching active markets...")
-    markets = client.fetch_markets(active=True, limit=10)
+    markets = client.fetch_markets(active=True, closed=False, limit=10)
     print(f"  -> {len(markets)} markets fetched")
 
     with open("markets.json", "w", encoding="utf-8") as f:

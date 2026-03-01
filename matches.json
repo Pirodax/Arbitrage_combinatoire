@@ -1,0 +1,66 @@
+[
+  {
+    "score": 90.02,
+    "text_score": 100.0,
+    "date_score": 0.21,
+    "price_gap": 0.928,
+    "polymarket": {
+      "title": "Who will Trump nominate as Fed Chair?",
+      "end": "2026-12-31T00:00:00Z",
+      "yes_price": 0.938
+    },
+    "kalshi": {
+      "title": "Who will Trump nominate as Fed Chair?",
+      "end": "2029-01-20T15:00:00Z",
+      "yes_ask": 0.01
+    }
+  },
+  {
+    "score": 85.35,
+    "text_score": 94.28571428571428,
+    "date_score": 4.96,
+    "price_gap": -0.042,
+    "polymarket": {
+      "title": "Presidential Election Winner 2028",
+      "end": "2028-11-07T00:00:00Z",
+      "yes_price": 0.008
+    },
+    "kalshi": {
+      "title": "2028 U.S. Presidential Election winner?",
+      "end": "2029-11-07T15:00:00Z",
+      "yes_ask": 0.05
+    }
+  },
+  {
+    "score": 80.82,
+    "text_score": 89.79591836734694,
+    "date_score": 0.05,
+    "price_gap": -0.75,
+    "polymarket": {
+      "title": "US recognize Somaliland by...?",
+      "end": "2026-06-30T22:00:00Z",
+      "yes_price": 0.0
+    },
+    "kalshi": {
+      "title": "Will Trump recognize Somaliland?",
+      "end": "2029-01-20T15:00:00Z",
+      "yes_ask": 0.75
+    }
+  },
+  {
+    "score": 76.73,
+    "text_score": 84.70588235294117,
+    "date_score": 4.96,
+    "price_gap": null,
+    "polymarket": {
+      "title": "Which party wins 2028 US Presidential Election?",
+      "end": "2028-11-07T00:00:00Z",
+      "yes_price": null
+    },
+    "kalshi": {
+      "title": "2028 Presidential Election winner? (Party)",
+      "end": "2029-11-07T15:00:00Z",
+      "yes_ask": 0.55
+    }
+  }
+]

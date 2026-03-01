@@ -1,5 +1,6 @@
 import requests
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 
@@ -27,6 +28,16 @@ class Market:
     start_date: Optional[str]
     end_date: Optional[str]
     clob_token_ids: list[str] = field(default_factory=list)
+
+    @property
+    def yes_ask(self) -> Optional[float]:
+        """Prix d'achat du YES (best_ask)."""
+        return self.best_ask
+
+    @property
+    def no_ask(self) -> Optional[float]:
+        """Prix d'achat du NO ≈ 1 - yes_bid."""
+        return round(1 - self.best_bid, 4) if self.best_bid is not None else None
 
     @classmethod
     def from_dict(cls, data: dict) -> "Market":
@@ -113,6 +124,15 @@ class Event:
         )
 
 
+def _parse_dt(s: Optional[str]) -> Optional[datetime]:
+    if not s:
+        return None
+    try:
+        return datetime.fromisoformat(s.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
 class PolymarketClient:
     def __init__(self):
         self.session = requests.Session()
@@ -128,6 +148,7 @@ class PolymarketClient:
         self,
         active: Optional[bool] = None,
         closed: Optional[bool] = None,
+        within_days: Optional[int] = None,
         limit: int = 100,
         offset: int = 0,
     ) -> list[Event]:
@@ -138,14 +159,31 @@ class PolymarketClient:
             params["closed"] = str(closed).lower()
 
         data = self._get("/events", params)
-        return [Event.from_dict(item) for item in data]
+        events = [Event.from_dict(item) for item in data]
 
-    def fetch_all_events(self, active: Optional[bool] = None, closed: Optional[bool] = None) -> list[Event]:
+        if within_days is not None:
+            cutoff = datetime.now(timezone.utc) + timedelta(days=within_days)
+            events = [
+                e for e in events
+                if e.end_date and _parse_dt(e.end_date) is not None
+                and _parse_dt(e.end_date) <= cutoff
+            ]
+        return events
+
+    def fetch_all_events(
+        self,
+        active: Optional[bool] = None,
+        closed: Optional[bool] = None,
+        within_days: Optional[int] = None,
+    ) -> list[Event]:
         events: list[Event] = []
         offset = 0
         limit = 100
         while True:
-            batch = self.fetch_events(active=active, closed=closed, limit=limit, offset=offset)
+            batch = self.fetch_events(
+                active=active, closed=closed, within_days=within_days,
+                limit=limit, offset=offset,
+            )
             events.extend(batch)
             if len(batch) < limit:
                 break
@@ -156,6 +194,7 @@ class PolymarketClient:
         self,
         active: Optional[bool] = None,
         closed: Optional[bool] = None,
+        within_days: Optional[int] = None,
         limit: int = 100,
         offset: int = 0,
     ) -> list[Market]:
@@ -166,14 +205,31 @@ class PolymarketClient:
             params["closed"] = str(closed).lower()
 
         data = self._get("/markets", params)
-        return [Market.from_dict(item) for item in data]
+        markets = [Market.from_dict(item) for item in data]
 
-    def fetch_all_markets(self, active: Optional[bool] = None, closed: Optional[bool] = None) -> list[Market]:
+        if within_days is not None:
+            cutoff = datetime.now(timezone.utc) + timedelta(days=within_days)
+            markets = [
+                m for m in markets
+                if m.end_date and _parse_dt(m.end_date) is not None
+                and _parse_dt(m.end_date) <= cutoff
+            ]
+        return markets
+
+    def fetch_all_markets(
+        self,
+        active: Optional[bool] = None,
+        closed: Optional[bool] = None,
+        within_days: Optional[int] = None,
+    ) -> list[Market]:
         markets: list[Market] = []
         offset = 0
         limit = 100
         while True:
-            batch = self.fetch_markets(active=active, closed=closed, limit=limit, offset=offset)
+            batch = self.fetch_markets(
+                active=active, closed=closed, within_days=within_days,
+                limit=limit, offset=offset,
+            )
             markets.extend(batch)
             if len(batch) < limit:
                 break

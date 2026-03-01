@@ -1,66 +1,71 @@
 [
   {
-    "score": 90.02,
-    "text_score": 100.0,
-    "date_score": 0.21,
-    "price_gap": 0.928,
+    "match_score": 74.37,
+    "text_score": 82.35294117647058,
+    "date_score": 2.49,
+    "arbitrage": {
+      "best_profit": 0.28,
+      "direction": "NO_PM + YES_KS",
+      "yes_pm_no_ks": -0.3,
+      "no_pm_yes_ks": 0.28
+    },
     "polymarket": {
-      "title": "Who will Trump nominate as Fed Chair?",
-      "end": "2026-12-31T00:00:00Z",
-      "yes_price": 0.938
+      "title": "Colombia Senate Election Winner",
+      "end": "2026-03-08T06:00:00Z",
+      "yes_ask": 0.94,
+      "no_ask": 0.07
     },
     "kalshi": {
-      "title": "Who will Trump nominate as Fed Chair?",
-      "end": "2029-01-20T15:00:00Z",
-      "yes_ask": 0.01
+      "title": "Who will win the 2026 Colombia Senate election?",
+      "end": "2027-05-31T14:00:00Z",
+      "yes_ask": 0.65,
+      "no_ask": 0.36
     }
   },
   {
-    "score": 85.35,
-    "text_score": 94.28571428571428,
-    "date_score": 4.96,
-    "price_gap": -0.042,
+    "match_score": 79.66,
+    "text_score": 88.23529411764706,
+    "date_score": 2.51,
+    "arbitrage": {
+      "best_profit": 0.14,
+      "direction": "NO_PM + YES_KS",
+      "yes_pm_no_ks": -0.21,
+      "no_pm_yes_ks": 0.14
+    },
     "polymarket": {
-      "title": "Presidential Election Winner 2028",
-      "end": "2028-11-07T00:00:00Z",
-      "yes_price": 0.008
+      "title": "Colombia Chamber of Representatives Election Winner",
+      "end": "2026-03-08T20:00:00Z",
+      "yes_ask": 0.87,
+      "no_ask": 0.17
     },
     "kalshi": {
-      "title": "2028 U.S. Presidential Election winner?",
-      "end": "2029-11-07T15:00:00Z",
-      "yes_ask": 0.05
+      "title": "Who will win the 2026 Colombia Chamber of Representatives election?",
+      "end": "2027-05-31T14:00:00Z",
+      "yes_ask": 0.69,
+      "no_ask": 0.34
     }
   },
   {
-    "score": 80.82,
-    "text_score": 89.79591836734694,
-    "date_score": 0.05,
-    "price_gap": -0.75,
+    "match_score": 77.63,
+    "text_score": 85.71428571428572,
+    "date_score": 4.92,
+    "arbitrage": {
+      "best_profit": -0.07,
+      "direction": "YES_PM + NO_KS",
+      "yes_pm_no_ks": -0.07,
+      "no_pm_yes_ks": null
+    },
     "polymarket": {
-      "title": "US recognize Somaliland by...?",
-      "end": "2026-06-30T22:00:00Z",
-      "yes_price": 0.0
+      "title": "Texas Republican Senate Primary Winner",
+      "end": "2026-03-03T00:00:00Z",
+      "yes_ask": 1.0,
+      "no_ask": null
     },
     "kalshi": {
-      "title": "Will Trump recognize Somaliland?",
-      "end": "2029-01-20T15:00:00Z",
-      "yes_ask": 0.75
-    }
-  },
-  {
-    "score": 76.73,
-    "text_score": 84.70588235294117,
-    "date_score": 4.96,
-    "price_gap": null,
-    "polymarket": {
-      "title": "Which party wins 2028 US Presidential Election?",
-      "end": "2028-11-07T00:00:00Z",
-      "yes_price": null
-    },
-    "kalshi": {
-      "title": "2028 Presidential Election winner? (Party)",
-      "end": "2029-11-07T15:00:00Z",
-      "yes_ask": 0.55
+      "title": "Texas Senate Republican primary turnout?",
+      "end": "2027-03-04T04:59:00Z",
+      "yes_ask": 0.97,
+      "no_ask": 0.07
     }
   }
 ]

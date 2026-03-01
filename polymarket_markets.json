@@ -11,15 +11,15 @@
       "No"
     ],
     "outcome_prices": [
-      0.279,
-      0.721
+      0.2455,
+      0.7545
     ],
-    "best_bid": 0.276,
-    "best_ask": 0.282,
-    "last_trade_price": 0.28,
-    "liquidity": 851.37013,
-    "volume": 32925.729341,
-    "volume_24hr": 4056.5266749999996,
+    "best_bid": 0.203,
+    "best_ask": 0.288,
+    "last_trade_price": 0.284,
+    "liquidity": 968.47263,
+    "volume": 33033.115177,
+    "volume_24hr": 4698.971548,
     "active": true,
     "closed": false,
     "start_date": "2025-03-26T16:49:31.084Z",
@@ -27,246 +27,6 @@
     "clob_token_ids": [
       "75467129615908319583031474642658885479135630431889036121812713428992454630178",
       "3842963720267267286970642336860752782302644680156535061700039388405652129691"
-    ]
-  },
-  {
-    "id": "540816",
-    "condition_id": "0x9c1a953fe92c8357f1b646ba25d983aa83e90c525992db14fb726fa895cb5763",
-    "question": "Russia-Ukraine Ceasefire before GTA VI?",
-    "slug": "russia-ukraine-ceasefire-before-gta-vi-554",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.565,
-      0.435
-    ],
-    "best_bid": 0.56,
-    "best_ask": 0.57,
-    "last_trade_price": 0.57,
-    "liquidity": 46711.2177,
-    "volume": 1347669.573588,
-    "volume_24hr": 3647.496169,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:00.174Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "8501497159083948713316135768103773293754490207922884688769443031624417212426",
-      "2527312495175492857904889758552137141356236738032676480522356889996545113869"
-    ]
-  },
-  {
-    "id": "540817",
-    "condition_id": "0x1fad72fae204143ff1c3035e99e7c0f65ea8d5cd9bd1070987bd1a3316f772be",
-    "question": "New Rihanna Album before GTA VI?",
-    "slug": "new-rhianna-album-before-gta-vi-926",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.52,
-      0.48
-    ],
-    "best_bid": 0.51,
-    "best_ask": 0.53,
-    "last_trade_price": 0.53,
-    "liquidity": 38518.865,
-    "volume": 641991.704603,
-    "volume_24hr": 222.71110700000003,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:10.582Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "98022490269692409998126496127597032490334070080325855126491859374983463996227",
-      "53831553061883006530739877284105938919721408776239639687877978808906551086026"
-    ]
-  },
-  {
-    "id": "540818",
-    "condition_id": "0x50ddb9cd80d5c271664a2ebb7fcaed1d0a148d82c8e8d314d830f75a944c3dcc",
-    "question": "New Playboi Carti Album before GTA VI?",
-    "slug": "new-playboi-carti-album-before-gta-vi-421",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.495,
-      0.505
-    ],
-    "best_bid": 0.47,
-    "best_ask": 0.52,
-    "last_trade_price": 0.51,
-    "liquidity": 30670.8638,
-    "volume": 677089.165654,
-    "volume_24hr": 279.59856999999994,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:10.837Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "88275040060084773376557187972215267513049848642895776801789297917961077894224",
-      "94376205816022955542979635542279932967359915765455578534002478996104754801969"
-    ]
-  },
-  {
-    "id": "540819",
-    "condition_id": "0x32b09f6390252b37d674501527e709016d55581b2c1e544bd4b8167f5f732f4c",
-    "question": "Will Jesus Christ return before GTA VI?",
-    "slug": "will-jesus-christ-return-before-gta-vi-665",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.485,
-      0.515
-    ],
-    "best_bid": 0.48,
-    "best_ask": 0.49,
-    "last_trade_price": 0.49,
-    "liquidity": 846274.53,
-    "volume": 9606980.964199,
-    "volume_24hr": 22720.673613,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:16.854Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "90435811253665578014957380826505992530054077692143838383981805324273750424057",
-      "92388629082681805622801622703528982922543286352927708208755887536971583436902"
-    ]
-  },
-  {
-    "id": "540820",
-    "condition_id": "0x84f8b70331323c2fba97d7ceaa9a35fb645a0770d0dbff169d07f24f376766e9",
-    "question": "Trump out as President before GTA VI?",
-    "slug": "trump-out-as-president-before-gta-vi-846",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.515,
-      0.485
-    ],
-    "best_bid": 0.51,
-    "best_ask": 0.52,
-    "last_trade_price": 0.52,
-    "liquidity": 42911.5954,
-    "volume": 519806.700202,
-    "volume_24hr": 1535.5719339999998,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:17.107Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "108999723207897941876452935557011604067917389120996960199512481363958770540884",
-      "64533579809297525579033609963634939501013332859992608996100633472507000251907"
-    ]
-  },
-  {
-    "id": "540843",
-    "condition_id": "0x7b49b9bacb5f435bc10f3b100ff59e2fdd346f7f92a9001881bc9825a0af0f11",
-    "question": "Will China invades Taiwan before GTA VI?",
-    "slug": "will-china-invades-taiwan-before-gta-vi-716",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.515,
-      0.485
-    ],
-    "best_bid": 0.51,
-    "best_ask": 0.52,
-    "last_trade_price": 0.51,
-    "liquidity": 57165.7289,
-    "volume": 1439697.218616,
-    "volume_24hr": 7724.228385000011,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:16.6Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "21695138873211375451055566770107682325494206727818897067665810321709249824909",
-      "17516427576383382756368467656206258206490015951115433065318503962238754362428"
-    ]
-  },
-  {
-    "id": "540844",
-    "condition_id": "0xbb57ccf5853a85487bc3d83d04d669310d28c6c810758953b9d9b91d1aee89d2",
-    "question": "Will bitcoin hit $1m before GTA VI?",
-    "slug": "will-bitcoin-hit-1m-before-gta-vi-872",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.487,
-      0.513
-    ],
-    "best_bid": 0.485,
-    "best_ask": 0.489,
-    "last_trade_price": 0.489,
-    "liquidity": 665717.36466,
-    "volume": 3392403.040697,
-    "volume_24hr": 6477.583655999999,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T15:48:17.361Z",
-    "end_date": "2026-07-31T12:00:00Z",
-    "clob_token_ids": [
-      "105267568073659068217311993901927962476298440625043565106676088842803600775810",
-      "91863162118308663069733924043159186005106558783397508844234610341221325526200"
-    ]
-  },
-  {
-    "id": "540881",
-    "condition_id": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
-    "question": "GTA VI released before June 2026?",
-    "slug": "gta-vi-released-before-june-2026",
-    "category": "",
-    "market_type": "normal",
-    "outcomes": [
-      "Yes",
-      "No"
-    ],
-    "outcome_prices": [
-      0.0205,
-      0.9795
-    ],
-    "best_bid": 0.02,
-    "best_ask": 0.021,
-    "last_trade_price": 0.021,
-    "liquidity": 37894.93059,
-    "volume": 7534660.866248,
-    "volume_24hr": 468032.91142800014,
-    "active": true,
-    "closed": false,
-    "start_date": "2025-05-02T17:00:26.233Z",
-    "end_date": "2026-05-31T12:00:00Z",
-    "clob_token_ids": [
-      "8441400852834915183759801017793514978104486628517653995211751018945988243154",
-      "109289569086508934142323222102974769075074494425163878721602922903101062859033"
     ]
   },
   {
@@ -281,15 +41,15 @@
       "No"
     ],
     "outcome_prices": [
-      0.29,
-      0.71
+      0.305,
+      0.695
     ],
-    "best_bid": 0.27,
+    "best_bid": 0.3,
     "best_ask": 0.31,
     "last_trade_price": 0.29,
-    "liquidity": 471.93219,
-    "volume": 47048.630667,
-    "volume_24hr": 115.72553800000003,
+    "liquidity": 469.17115,
+    "volume": 47050.530667,
+    "volume_24hr": 153.289195,
     "active": true,
     "closed": false,
     "start_date": "2025-05-12T22:50:41.123Z",
@@ -297,6 +57,216 @@
     "clob_token_ids": [
       "24327803960645909378149041810697343640752122608192367041827900158592826352552",
       "86488478623677188352872801318507143761188967461168408688159600382919967378486"
+    ]
+  },
+  {
+    "id": "544093",
+    "condition_id": "0xe2b48e3b44de9658ee9c8b37354301763e33c0b502fd966839d644b4c0a9dea8",
+    "question": "Will Harvey Weinstein be sentenced to less than 5 years in prison?",
+    "slug": "will-harvey-weinstein-be-sentenced-to-less-than-5-years-in-prison",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.1095,
+      0.8905
+    ],
+    "best_bid": 0.1,
+    "best_ask": 0.119,
+    "last_trade_price": 0.12,
+    "liquidity": 441.69356,
+    "volume": 16287.647337,
+    "volume_24hr": 109.711816,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-05-12T22:50:42.117Z",
+    "end_date": "2025-12-31T12:00:00Z",
+    "clob_token_ids": [
+      "77166477669007661974218999697956080000161736671391584414287437514245884953047",
+      "47055352475798285920984907840917431698812931301054546103955312973973172985230"
+    ]
+  },
+  {
+    "id": "544094",
+    "condition_id": "0x3209617364a0d598435806b59d0d056b606022dc9028c466ad7912df94fc170c",
+    "question": "Will Harvey Weinstein be sentenced to between 5 and 10 years in prison?",
+    "slug": "will-harvey-weinstein-be-sentenced-to-between-5-and-10-years-in-prison",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.083,
+      0.917
+    ],
+    "best_bid": 0.08,
+    "best_ask": 0.086,
+    "last_trade_price": 0.07,
+    "liquidity": 1327.78594,
+    "volume": 12766.126355,
+    "volume_24hr": 95.248037,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-05-12T22:50:42.625Z",
+    "end_date": "2025-12-31T12:00:00Z",
+    "clob_token_ids": [
+      "8585617872562550075367684165842985213222082790621129799520234539666057750015",
+      "103705222348348023632358209307161171933864556870678885035120650593331360918837"
+    ]
+  },
+  {
+    "id": "544095",
+    "condition_id": "0x3d495a3e05eaffe438bb1c2ab97ed57a79b0a6ab18a2ca6fa5b448e20ce70082",
+    "question": "Will Harvey Weinstein be sentenced to between 10 and 20 years in prison?",
+    "slug": "will-harvey-weinstein-be-sentenced-to-between-10-and-20-years-in-prison",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.2555,
+      0.7445
+    ],
+    "best_bid": 0.251,
+    "best_ask": 0.26,
+    "last_trade_price": 0.261,
+    "liquidity": 259.42557,
+    "volume": 104173.7695,
+    "volume_24hr": 1118.669448,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-05-12T22:50:42.371Z",
+    "end_date": "2025-12-31T12:00:00Z",
+    "clob_token_ids": [
+      "15540133404064485946536607974212890170021691204987131841181394872998839987451",
+      "63603874958591978684257718702104189214159397118281244112857573557732401361881"
+    ]
+  },
+  {
+    "id": "544096",
+    "condition_id": "0xdee5db5410b362783a1405b66b9aa08a7d050ae1f99e8da85b9d1ae7962dad3b",
+    "question": "Will Harvey Weinstein be sentenced to between 20 and 30 years in prison?",
+    "slug": "will-harvey-weinstein-be-sentenced-to-between-20-and-30-years-in-prison",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.239,
+      0.761
+    ],
+    "best_bid": 0.21,
+    "best_ask": 0.268,
+    "last_trade_price": 0.23,
+    "liquidity": 298.33895,
+    "volume": 124833.535767,
+    "volume_24hr": 127.89343699999998,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-05-12T22:50:48.281Z",
+    "end_date": "2025-12-31T12:00:00Z",
+    "clob_token_ids": [
+      "40689385937970031985272152180777653235879119412231903065658922913468759560353",
+      "109223657334725476924710634471321315385389367621714474291402615707818729630121"
+    ]
+  },
+  {
+    "id": "544097",
+    "condition_id": "0x2499928ffbe6022444543dcd940075259cecb5e41e346284b578cb64e1404d32",
+    "question": "Will Harvey Weinstein be sentenced to more than 30 years in prison?",
+    "slug": "will-harvey-weinstein-be-sentenced-to-more-than-30-years-in-prison",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.069,
+      0.931
+    ],
+    "best_bid": 0.007,
+    "best_ask": 0.131,
+    "last_trade_price": 0.007,
+    "liquidity": 935.15143,
+    "volume": 14337.195815,
+    "volume_24hr": 95.90670399999998,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-05-12T22:50:48.535Z",
+    "end_date": "2025-12-31T12:00:00Z",
+    "clob_token_ids": [
+      "87036266705700330884624690101790543034325645582506946990660049003915176778714",
+      "26608800110066527607246656145735191327716408714826934367635297922290688100618"
+    ]
+  },
+  {
+    "id": "556062",
+    "condition_id": "0xfc6260666d020a912a87d9000eff5116d2adfb8c30aba543427a4c1f1411f1a0",
+    "question": "MegaETH market cap (FDV) >$2B one day after launch?",
+    "slug": "megaeth-market-cap-fdv-2b-one-day-after-launch-738-867-649-272",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.175,
+      0.825
+    ],
+    "best_bid": 0.17,
+    "best_ask": 0.18,
+    "last_trade_price": 0.18,
+    "liquidity": 84744.7565,
+    "volume": 5368410.384013,
+    "volume_24hr": 26876.979483000006,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-06-26T19:48:44.456Z",
+    "end_date": "2025-12-31T00:00:00Z",
+    "clob_token_ids": [
+      "57301498276970257025109591078431189727442302532145853906375186182281603517458",
+      "20615575591261238050354259319465440337102580196335623615376639598123117400036"
+    ]
+  },
+  {
+    "id": "556108",
+    "condition_id": "0xe459d1b598da754c9fd5fc155b6efe3a144aa80abbc7d041fce7d35d903d3c8e",
+    "question": "Will MegaETH perform an airdrop by June 30? ",
+    "slug": "will-megaeth-perform-an-airdrop-by-june-30-143-229-513-574-212-254",
+    "category": "",
+    "market_type": "normal",
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "outcome_prices": [
+      0.715,
+      0.285
+    ],
+    "best_bid": 0.712,
+    "best_ask": 0.718,
+    "last_trade_price": 0.7,
+    "liquidity": 9896.73707,
+    "volume": 531313.620343,
+    "volume_24hr": 1121.91743,
+    "active": true,
+    "closed": false,
+    "start_date": "2025-06-26T19:51:03.475Z",
+    "end_date": "2026-02-01T05:00:00Z",
+    "clob_token_ids": [
+      "96797656031191119176188453471637044475353637081608890153571023284371119486681",
+      "102844052859529992637803443259193395522411387362312885030298797134413940349829"
     ]
   }
 ]

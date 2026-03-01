@@ -1,6 +1,12 @@
+import time
+
 import requests
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta, timezone
 from typing import Optional
+
+
+_REQUEST_DELAY = 0.3   # secondes entre chaque page paginée
 
 
 KALSHI_API_BASE = "https://api.elections.kalshi.com/trade-api/v2"
@@ -88,6 +94,7 @@ class KalshiClient:
         self,
         status: str = "open",
         with_nested_markets: bool = True,
+        within_days: Optional[int] = None,
         limit: int = 200,
         cursor: Optional[str] = None,
     ) -> tuple[list[KalshiEvent], Optional[str]]:
@@ -96,6 +103,11 @@ class KalshiClient:
             "status": status,
             "with_nested_markets": str(with_nested_markets).lower(),
         }
+        if within_days is not None:
+            # "at least one market closing before cutoff"
+            params["min_close_ts"] = int(datetime.now(timezone.utc).timestamp())
+            cutoff_ts = int((datetime.now(timezone.utc) + timedelta(days=within_days)).timestamp())
+            params["max_close_ts"] = cutoff_ts
         if cursor:
             params["cursor"] = cursor
 
@@ -104,23 +116,30 @@ class KalshiClient:
         next_cursor = data.get("cursor") or None
         return events, next_cursor
 
-    def fetch_all_events(self, status: str = "open") -> list[KalshiEvent]:
+    def fetch_all_events(self, status: str = "open", within_days: Optional[int] = None) -> list[KalshiEvent]:
         events: list[KalshiEvent] = []
         cursor = None
         while True:
-            batch, cursor = self.fetch_events(status=status, cursor=cursor)
+            batch, cursor = self.fetch_events(status=status, within_days=within_days, cursor=cursor)
             events.extend(batch)
             if not cursor:
                 break
+            time.sleep(_REQUEST_DELAY)
         return events
 
     def fetch_markets(
         self,
         status: str = "open",
+        within_days: Optional[int] = None,
         limit: int = 200,
         cursor: Optional[str] = None,
     ) -> tuple[list[KalshiMarket], Optional[str]]:
         params: dict = {"limit": limit, "status": status}
+        if within_days is not None:
+            params["min_close_ts"] = int(datetime.now(timezone.utc).timestamp())
+            params["max_close_ts"] = int(
+                (datetime.now(timezone.utc) + timedelta(days=within_days)).timestamp()
+            )
         if cursor:
             params["cursor"] = cursor
 
@@ -129,12 +148,13 @@ class KalshiClient:
         next_cursor = data.get("cursor") or None
         return markets, next_cursor
 
-    def fetch_all_markets(self, status: str = "open") -> list[KalshiMarket]:
+    def fetch_all_markets(self, status: str = "open", within_days: Optional[int] = None) -> list[KalshiMarket]:
         markets: list[KalshiMarket] = []
         cursor = None
         while True:
-            batch, cursor = self.fetch_markets(status=status, cursor=cursor)
+            batch, cursor = self.fetch_markets(status=status, within_days=within_days, cursor=cursor)
             markets.extend(batch)
             if not cursor:
                 break
+            time.sleep(_REQUEST_DELAY)
         return markets
